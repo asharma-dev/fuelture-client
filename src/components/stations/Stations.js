@@ -3,7 +3,6 @@ import { Icon } from "leaflet";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 const { REACT_APP_STADIA_API_KEY } = process.env;
-console.log(">>", REACT_APP_STADIA_API_KEY);
 
 const Stations = () => {
   // State for stations

@@ -15,7 +15,6 @@ const TeamMembers = () => {
           "https://fuelture-server.vercel.app/api/team-members"
         );
         const fetchedTeamMembers = await response.json();
-        console.log(fetchedTeamMembers);
         setTeamMembers(fetchedTeamMembers); // .sort((a, b) => a.Role > b.Role && 1 || -1)
       }
     };
