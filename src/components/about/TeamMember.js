@@ -3,13 +3,13 @@ import { FaLinkedin, FaGithub, FaStackOverflow } from "react-icons/fa";
 const TeamMember = ({ member }) => {
   return (
     <div className="team-member">
-      <div>
+      {/* <div>
         <img
           src={member.avatarUrl}
           alt={member.Name}
           className="team-member-image"
         />
-      </div>
+      </div> */}
 
       <div className="member-name-role">
         <p className="team-member-name">{member.Name}</p>

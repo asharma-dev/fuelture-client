@@ -8,56 +8,62 @@ import EvTimeline from "./EvTimeline/EvTimeline";
 import ReadEvNews from "./ReadEvNews";
 import FindAnEv from "./FindAnEv";
 import SalesFigures from "./SalesFigures/SalesFigures";
-import EVFuture from './EVFuture';
+import EVFuture from "./EVFuture";
 
 const Home = () => {
-	const [salesFigures, setSalesFigures] = useState([]);
+  const [salesFigures, setSalesFigures] = useState([]);
 
-	useEffect(() => {
-		// Initially when the component renders the unmounted variable set to false.
-		let unmounted = false;
-		
-		const getSalesFigures = async () => {
+  useEffect(() => {
+    // Initially when the component renders the unmounted variable set to false.
+    let unmounted = false;
 
-			// Fetch and set the state only when the component is mounted
-			if (!unmounted) {
-				const url = "/api/sales";
-				const res = await fetch(url);
-				const data = await res.json();
-				
-				setSalesFigures(data);
-			}
-		};
+    const getSalesFigures = async () => {
+      // Fetch and set the state only when the component is mounted
+      if (!unmounted) {
+        const url = "https://fuelture-server.vercel.app/api/sales";
+        const res = await fetch(url);
+        const data = await res.json();
 
-		getSalesFigures();
+        setSalesFigures(data);
+      }
+    };
 
-		// After this component gets unmounted unsubscribe any background calls.
-		return () => {
-			unmounted = true;
-		};
-	}, []);
+    getSalesFigures();
 
-	return (
-		<div>
-			<HomeBanner></HomeBanner>
-			<div className="page-content">
-				<ElectricVehicleIntro />
-				<TypesOfEvs />
+    // After this component gets unmounted unsubscribe any background calls.
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
-				<div className="sales-share-projections-container">
-					<SalesFigures salesFigures={salesFigures.filter(figure => (figure["Fuel type"] === "Battery electric" || figure["Fuel type"] === "Hybrid electric" || figure["Fuel type"] === "Plug-in hybrid electric") && figure["Vehicle type"] === "Total, vehicle type")} />
-					<MarketShare salesFigures={salesFigures} />
-					<EVFuture />
-				</div>
-					
-				
-				<EvIncentives />
-				<FindAnEv />
-				<EvTimeline />
-				<ReadEvNews />
-			</div>
-		</div>
-	);
+  return (
+    <div>
+      <HomeBanner></HomeBanner>
+      <div className="page-content">
+        <ElectricVehicleIntro />
+        <TypesOfEvs />
+
+        <div className="sales-share-projections-container">
+          <SalesFigures
+            salesFigures={salesFigures.filter(
+              (figure) =>
+                (figure["Fuel type"] === "Battery electric" ||
+                  figure["Fuel type"] === "Hybrid electric" ||
+                  figure["Fuel type"] === "Plug-in hybrid electric") &&
+                figure["Vehicle type"] === "Total, vehicle type"
+            )}
+          />
+          <MarketShare salesFigures={salesFigures} />
+          <EVFuture />
+        </div>
+
+        <EvIncentives />
+        <FindAnEv />
+        <EvTimeline />
+        <ReadEvNews />
+      </div>
+    </div>
+  );
 };
 
 export default Home;
