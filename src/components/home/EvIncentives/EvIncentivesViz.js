@@ -44,14 +44,12 @@ const EvIncentivesViz = () => {
     useEffect(() => {
         // Initially when the component renders the unmounted variable set to false.
         let unmounted = false;
-
         const getIncentives = async () => {
             // Set the state only when the component is mounted
             if (!unmounted) {
-                const url = "/api/incentives";
+                const url = "https://fuelture-server.vercel.app/api/incentives";
                 const res = await fetch(url);
                 const data = await res.json();
-
                 setIncentives(data.filter(incentive => incentive.Condition === "New"));
             }
         };
